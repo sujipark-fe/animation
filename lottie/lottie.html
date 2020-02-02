@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lottie 테스트</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script> -->
+    <script src="./bodymovin.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player
+    src="https://assets2.lottiefiles.com/packages/lf20_J0Euvx.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop controls autoplay >
+</lottie-player> -->
+<!-- <script type="text/javascript" src="자신파일경로/jquery.ajax-cross-origin.min.js"></script> -->
+    <style>
+    .wrap{max-width:550px;width:100%;margin:auto;}
+    #coin{width:100%;height:auto;}
+    svg{width:100%;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="svg"></div>
+    </div>
+
+    <script>                
+        //bodymovin
+        var animation = bodymovin.loadAnimation({
+            container: document.getElementById('svg'),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "./browser.json"
+        });
+        </script>
+</body>
+</html>
