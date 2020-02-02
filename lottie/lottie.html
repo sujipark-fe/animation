@@ -15,9 +15,9 @@
 </lottie-player> -->
 <!-- <script type="text/javascript" src="자신파일경로/jquery.ajax-cross-origin.min.js"></script> -->
     <style>
-    .wrap{max-width:550px;width:100%;margin:auto;}
-    #coin{width:100%;height:auto;}
-    svg{width:100%;}
+    .wrap{max-width:550px;width:100%;margin:auto;border:1px solid #000;}
+    #svg{width:100%;height:auto;border:1px solid #aaa;}
+    svg{width:100% !important;height:auto !important;}
     </style>
 </head>
 <body>
@@ -32,6 +32,7 @@
             renderer: "svg",
             loop: true,
             autoplay: true,
+            viewBoxSize: '0 0 100 100',
             path: "./browser.json"
         });
         </script>
