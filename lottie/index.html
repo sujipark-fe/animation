@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lottie 테스트</title>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
+    <script src="./bodymovin.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player
+        src="https://assets2.lottiefiles.com/packages/lf20_J0Euvx.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop controls autoplay >
+    </lottie-player> -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        .wrap{margin:auto;text-align:center;font-size:20px;}
+        .list:before,.list:after{display:block;clear:both;content:'';}
+        .list li{display:block;float:left;width:33.3%;}
+        .list h2{margin:10px 0;}
+
+        .source{width:100%;border:4px solid #444;}
+        .source video{width:100%;}
+        /* IE에서 SVG가 wrapper의 크기만큼 width:100%으로 늘어나지 않는 이슈 */
+        img, #svg{width:100%;height:auto;}
+        svg{width:100% !important;height:auto !important;}
+        /* IE9 */
+        img[src$=".svg"] {
+            width: 100%; 
+        }
+        /* IE10+ */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            img[src$=".svg"] {
+                width: 100%; 
+            }
+        }
+        @media all and (max-width:600px){
+            .wrap{font-size:16px;}
+            .list li{overflow:hidden;float:none;width:100%;margin:auto;margin-bottom:10px;}
+            .source{display:inline-block;width:55% !important;}
+            .info{display:inline-block;width:43%;padding-left:15px;text-align:left;vertical-align:top;margin-top:30px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="list">
+            <li class="gif">
+                <div class="source">
+                    <img src="./src/insta.gif" alt="">
+                </div>
+                <div class="info">
+                    <h2>gif</h2>
+                    <p class="size">용량: 1,115KB<br>로드타임: 0.123s</p> <!-- 1.1 MB, 123ms -->
+                </div>
+            </li>
+            <li class="svg">
+                <div class="source" id="svg"></div>
+                <div class="info">
+                    <h2>svg</h2>
+                    <p class="size">용량: 10KB<br>로드타임: .2s</p> <!-- 9.9 KB, 2ms -->
+                </div>
+            </li>
+            <li class="video">
+                <div class="source video_wrap">
+                    <video src="./src/insta_.mp4" autoplay loop muted playsinline></video><!-- 263.69Kb -->
+                    <!-- <video controls muted>
+                        <source src="./src/flower.webm" type="video/webm">
+                        <source src="./src/flower.mp4" type="video/mp4">
+                        Sorry, your browser doesn't support embedded videos.
+                    </video> -->
+                </div>
+                <div class="info">
+                    <h2>video</h2>
+                    <p class="size">용량: 259KB<br>로드타임: .4s</p> <!-- 259 KB, 4ms -->
+                </div>
+            </li>
+        </ul> 
+    </div>
+    <script>                
+        //bodymovin
+        var animation = bodymovin.loadAnimation({
+            container: document.getElementById('svg'),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            viewBoxSize: '0 0 100 100',
+            // path: "./browser.json"
+            path: "./src/insta.json"
+        });
+        </script>
+</body>
+</html>
