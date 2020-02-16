@@ -1,0 +1,14 @@
+1. 스프라이트 시트에서 하나씩 잘라서 새 레이어로 만든다
+(1레이어 = 1 자른 이미지)
+2. 새 레이어 - 자른 이미지 레이어들 복사 붙여넣기
+새 레이어사이즈: width=자른이미지*개수
+2-1.properties(설정)-guides,grid & slices...
+2-2. grid-gridline every: (자른이미지사이즈)
+2-3. 자른 이미지 레이어들 복사 붙여넣기
+3. window - timeline
+4. 타임라인 우측상단 햄버거메뉴 - conver to frame/video timeline
+-make frames from layers 
+5. save for web - gif - animation: looping options: forever
+
+1. file-export-render video
+팝업 설정-photoshop image sequesce / png

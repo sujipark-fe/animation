@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>apng, webp 테스트</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        .wrap{margin:auto;text-align:center;font-size:20px;}
+        .list{overflow:hidden;margin-bottom:40px;}
+        .list:before,.list:after{display:block;clear:both;content:'';}
+        .list li{display:block;float:left;width:33.3%;}
+        .list h2{margin:10px 0;}
+        .source{width:100%;}
+        img, video{width:100%;}
+        p{text-align: left;}
+
+        table{border-collapse:collapse;}
+        table td{padding: 4px 6px;border:1px solid #aaa;}
+        @media all and (max-width:600px){
+            .wrap{font-size:16px;}
+            .list li{overflow:hidden;float:none;width:100%;margin:auto;margin-bottom:10px;}
+            .source{display:inline-block;width:55% !important;}
+            .info{display:inline-block;width:43%;padding-left:15px;text-align:left;vertical-align:top;margin-top:30px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="list">
+            <li class="gif">
+                <div class="source">
+                    <img src="./src/megaman.gif" alt="">
+                </div>
+                <div class="info">
+                    <h2>gif</h2>
+                    <p class="size">용량: 76.1KB<br>로드타임: 123ms</p>
+                </div>
+            </li>
+            <li class="apng">
+                <div class="source">
+                    <img src="./src/apng.png" alt="">
+                </div>
+                <div class="info">
+                    <h2>apng</h2>
+                    <p class="size">용량: 13.4KB<br><small>dither:88%</small></p>
+                </div>
+            </li>
+            <li class="video">
+                <div class="source video_wrap">
+                    <video src="./src/megaman.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="info">
+                    <h2>video(H.264 mp4)</h2>
+                    <p class="size">용량: 185KB<br>재생시간: 1s<br>로드타임: 4ms</p> 
+                </div>
+            </li>
+        </ul> 
+
+        <div class="tbl">
+            <table>
+                <th>
+                    <tr>
+                        <td>파일타입</td>
+                        <td>용량</td>
+                        <td>pc</td>
+                        <td>mobile</td>
+                    </tr>
+                </th>
+                <tr>
+                    <td>gif</td>
+                    <td>76.1KB</td>
+                    <td>O</td>
+                    <td>O</td>
+                </tr>
+                <tr>
+                    <td>apng</td>
+                    <td>13.4KB</td>
+                    <td>IE불가</td>
+                    <td>삼성브라우저 7.2이상</td>
+                </tr>
+                <tr>
+                    <td>video(H.264 mp4)</td>
+                    <td>185KB</td>
+                    <td>IE9이상</td>
+                    <td>O</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
