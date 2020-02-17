@@ -111,7 +111,7 @@
         //             APNG.animateImage(images[i]);
         //         }
         //     }catch(e){
-        //         $(".msg").show().text("apng-canvas not needed"); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
+        //         $(".msg").show().text("apng-canvas not needed");
         //     }
         // });
 
@@ -123,12 +123,13 @@
             // }
             //JQUERY 안쓰면 안됨
             $(".apng-image").find("img").each(function () { APNG.animateImage(this); });
+            $(".msg").show().text("canvas 로 로드됩니다.");
         })
         .catch(function () {
             // 브라우저가 apng 지원하면 apng로, 지원하지 않으면 canvas로 만들어줌
             // 이 라이브러리를 실행하려면 Canvas, Typed Arrays, Blob URLs, requestAnimationFrame 을 지원되어야 한다.
             // 이 라이브러리 현재 지원 브라우저: 크롬, 파폭, IE +, 엣지
-            $(".msg").show().text("apng-canvas not needed"); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
+            $(".msg").show().text("apng 로 로드됩니다."); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
         });
     </script>
 </body>
