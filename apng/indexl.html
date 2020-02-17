@@ -7,17 +7,20 @@
     <title>apng, webp 테스트</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        .wrap{margin:auto;text-align:center;font-size:20px;}
+        .wrap{margin:auto;text-align:center;font-size:15px;}
         .list{overflow:hidden;margin-bottom:40px;}
         .list:before,.list:after{display:block;clear:both;content:'';}
-        .list li{display:block;float:left;width:33.3%;}
+        .list li{display:block;float:left;width:25%;padding:10px;border:1px solid #eee;}
         .list h2{margin:10px 0;}
         .source{width:100%;}
-        img, video{width:100%;}
+        img, video, canvas{width:100%;}
         p{text-align: left;}
 
-        table{border-collapse:collapse;}
-        table td{padding: 4px 6px;border:1px solid #aaa;}
+        table{border-collapse:collapse;font-size:14px;}
+        table td{padding: 6px 8px;border:1px solid #aaa;}
+        table td:nth-child(4){max-width: 300px;}
+        table tr:hover{background-color:rgba(0,0,0,0.3);}
+
         @media all and (max-width:600px){
             .wrap{font-size:16px;}
             .list li{overflow:hidden;float:none;width:100%;margin:auto;margin-bottom:10px;}
@@ -25,6 +28,8 @@
             .info{display:inline-block;width:43%;padding-left:15px;text-align:left;vertical-align:top;margin-top:30px;}
         }
     </style>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="./apng-canvas.min.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -33,61 +38,98 @@
                 <div class="source">
                     <img src="./src/megaman.gif" alt="">
                 </div>
-                <div class="info">
-                    <h2>gif</h2>
-                    <p class="size">용량: 76.1KB<br>로드타임: 123ms</p>
-                </div>
-            </li>
-            <li class="apng">
-                <div class="source">
-                    <img src="./src/apng.png" alt="">
-                </div>
-                <div class="info">
-                    <h2>apng</h2>
-                    <p class="size">용량: 13.4KB<br><small>dither:88%</small></p>
-                </div>
+                <h2>gif</h2>
             </li>
             <li class="video">
                 <div class="source video_wrap">
                     <video src="./src/megaman.mp4" autoplay loop muted playsinline></video>
                 </div>
+                <h2>video(H.264 mp4)</h2>
+            </li>
+            <li class="apng">
+                <div class="source">
+                    <img src="./src/apng_animated.png" alt="">
+                </div>
+                <h2>apng</h2>
+            </li>
+            <li class="apng">
+                <div class="source apng-image"><img src="./src/apng_animated.png" alt=""></div>
+                <div class="msg"></div>
                 <div class="info">
-                    <h2>video(H.264 mp4)</h2>
-                    <p class="size">용량: 185KB<br>재생시간: 1s<br>로드타임: 4ms</p> 
+                    <h2>apng/canvas</h2>
                 </div>
             </li>
         </ul> 
 
         <div class="tbl">
             <table>
-                <th>
+                <thead>
                     <tr>
                         <td>파일타입</td>
-                        <td>용량</td>
-                        <td>pc</td>
-                        <td>mobile</td>
+                        <td>파일사이즈</td>
+                        <td>PC</td>
+                        <td>MOBILE</td>
+                        <td>비고</td>
                     </tr>
-                </th>
+                </thead>
                 <tr>
                     <td>gif</td>
                     <td>76.1KB</td>
                     <td>O</td>
                     <td>O</td>
-                </tr>
-                <tr>
-                    <td>apng</td>
-                    <td>13.4KB</td>
-                    <td>IE불가</td>
-                    <td>삼성브라우저 7.2이상</td>
+                    <td>용량큼, 모든 브라우저 지원<br><small>dither:88%</small></td>
                 </tr>
                 <tr>
                     <td>video(H.264 mp4)</td>
                     <td>185KB</td>
                     <td>IE9이상</td>
                     <td>O</td>
+                    <td>재생시간: 1s<br>투명배경 아니라서 파일사이즈 다를 수 있음</td>
+                </tr>
+                <tr>
+                    <td>apng</td>
+                    <td>12.5KB</td>
+                    <td>IE, Edge 불가</td>
+                    <td>삼성브라우저 7.2이상 (확인필요)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>apng/canvas</td>
+                    <td>12.6KB</td>
+                    <td>IE9이상</td>
+                    <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상</td>
+                    <td></td>
                 </tr>
             </table>
         </div>
     </div>
+    <script>
+        // APNG.ifNeeded(function(){
+        //     try{
+        //         var images = document.querySelectorAll(".apng-image");
+        //         for (var i = 0; i < images.length; i++) {
+        //             APNG.animateImage(images[i]);
+        //         }
+        //     }catch(e){
+        //         $(".msg").show().text("apng-canvas not needed"); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
+        //     }
+        // });
+
+        APNG.ifNeeded()
+        .then(function () {
+            // var images = document.querySelectorAll(".apng-image");
+            // for (var i = 0; i < images.length; i++) {
+            //     APNG.animateImage(images[i]);
+            // }
+            //JQUERY 안쓰면 안됨
+            $(".apng-image").find("img").each(function () { APNG.animateImage(this); });
+        })
+        .catch(function () {
+            // 브라우저가 apng 지원하면 apng로, 지원하지 않으면 canvas로 만들어줌
+            // 이 라이브러리를 실행하려면 Canvas, Typed Arrays, Blob URLs, requestAnimationFrame 을 지원되어야 한다.
+            // 이 라이브러리 현재 지원 브라우저: 크롬, 파폭, IE +, 엣지
+            $(".msg").show().text("apng-canvas not needed"); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
+        });
+    </script>
 </body>
 </html>
