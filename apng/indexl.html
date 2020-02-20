@@ -10,16 +10,15 @@
         .wrap{margin:auto;text-align:center;font-size:15px;}
         .list{overflow:hidden;margin-bottom:40px;}
         .list:before,.list:after{display:block;clear:both;content:'';}
-        .list li{display:block;float:left;width:25%;padding:10px;border:1px solid #eee;}
+        .list li{display:block;float:left;width:25%;padding:10px;}
         .list h2{margin:10px 0;}
         .source{width:100%;}
-        img, video, canvas{width:100%;}
-        p{text-align: left;}
+        img, video, canvas{width:100%;border:1px solid #eee;}
 
-        table{border-collapse:collapse;font-size:14px;}
+        table{margin:auto;border-collapse:collapse;font-size:14px;}
         table td{padding: 6px 8px;border:1px solid #aaa;}
         table td:nth-child(4){max-width: 300px;}
-        table tr:hover{background-color:rgba(0,0,0,0.3);}
+        table tr:hover{background-color:rgba(0,0,0,0.2);}
 
         @media all and (max-width:600px){
             .wrap{font-size:16px;}
@@ -77,14 +76,14 @@
                     <td>76.1KB</td>
                     <td>O</td>
                     <td>O</td>
-                    <td>용량큼, 모든 브라우저 지원<br><small>dither:88%</small></td>
+                    <td>용량큼, 모든 브라우저 지원<br><small>*dither:88%</small></td>
                 </tr>
                 <tr>
                     <td>video(H.264 mp4)</td>
                     <td>185KB</td>
                     <td>IE9이상</td>
                     <td>O</td>
-                    <td>재생시간: 1s<br>투명배경 아니라서 파일사이즈 다를 수 있음</td>
+                    <td>재생시간: 1s 반복재생<br><small>*투명 배경일 경우 용량이 더 커질 수 있음</small></td>
                 </tr>
                 <tr>
                     <td>apng</td>
@@ -96,9 +95,9 @@
                 <tr>
                     <td>apng/canvas</td>
                     <td>12.6KB</td>
-                    <td>IE9이상</td>
+                    <td>IE10이상</td>
                     <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상</td>
-                    <td></td>
+                    <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원. <small style="color:blue">*웹서버에서 확인필요</small></td>
                 </tr>
             </table>
         </div>
@@ -121,15 +120,20 @@
             // for (var i = 0; i < images.length; i++) {
             //     APNG.animateImage(images[i]);
             // }
-            //JQUERY 안쓰면 안됨
+            //JQUERY 안쓰면 안됨 왤까?
+
             $(".apng-image").find("img").each(function () { APNG.animateImage(this); });
-            $(".msg").show().text("canvas 로 로드됩니다.");
+            // $(".msg").show().text("canvas 로 로드됩니다.");
+            var msg = '<p>canvas 로 로드됩니다.</p>'
+            $('.info').append(msg);
         })
         .catch(function () {
             // 브라우저가 apng 지원하면 apng로, 지원하지 않으면 canvas로 만들어줌
             // 이 라이브러리를 실행하려면 Canvas, Typed Arrays, Blob URLs, requestAnimationFrame 을 지원되어야 한다.
             // 이 라이브러리 현재 지원 브라우저: 크롬, 파폭, IE +, 엣지
-            $(".msg").show().text("apng 로 로드됩니다."); //브라우저가 apng를 지원하면 이 문구는 나오지 않는다.
+            // $(".msg").show().text("apng 로 로드됩니다.");
+            var msg = '<p>apng 로 로드됩니다.</p>'
+            $('.info').append(msg);
         });
     </script>
 </body>
