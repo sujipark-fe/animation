@@ -31,7 +31,7 @@
     <script src="./apng-canvas.min.js"></script>
 </head>
 <body>
-    <div class="wrap">
+    <div class="wrap">    
         <ul class="list">
             <li class="gif">
                 <div class="source">
@@ -41,19 +41,23 @@
             </li>
             <li class="video">
                 <div class="source video_wrap">
+                    <!-- psd 애니메이션 딜레이타임은 0.05에서 반올림됨
+                        0.01 ~ 0.04 / 0.05 ~ 0.1 사이 같은 움직임
+                        gif, apng와 같은 애니메이션 딜레이 시간은 0.04 ~ 0.1 사이의 속도 인데, 
+                        포토샵에서는 그 사이 딜레이시간을 설정할 수 없음
+                    -->
                     <video src="./src/megaman.mp4" autoplay loop muted playsinline></video>
                 </div>
                 <h2>video(H.264 mp4)</h2>
             </li>
             <li class="apng">
                 <div class="source">
-                    <img src="./src/apng_animated.png" alt="">
+                    <img src="./src/apng_animated.png" alt="apng">
                 </div>
                 <h2>apng</h2>
             </li>
             <li class="apng">
                 <div class="source apng-image"><img src="./src/apng_animated.png" alt=""></div>
-                <div class="msg"></div>
                 <div class="info">
                     <h2>apng/canvas</h2>
                 </div>
@@ -89,31 +93,20 @@
                     <td>apng</td>
                     <td>12.5KB</td>
                     <td>IE, Edge 불가</td>
-                    <td>삼성브라우저 7.2이상 (하위디바이스 확인필요)<br>확인완료:안드로이드8.0, ios 13  safari, chrome</td>
+                    <td>삼성브라우저 7.2이상 (하위디바이스 확인필요)<br>확인완료:안드로이드8.0, ios 13 safari, chrome</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>apng/canvas</td>
                     <td>12.6KB</td>
                     <td>IE10이상</td>
-                    <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상<br>확인완료:안드로이드8.0, ios 13  safari, chrome</td>
-                    <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원. <small style="color:blue">*웹서버에서 확인필요</small></td>
+                    <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상<br>확인완료:안드로이드8.0, 삼성브라우저, chrome 79 / ios 12 safari, ios chrome 79</td>
+                    <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원. <small style="color:blue">*CORS정책으로 인해 웹서버에서 확인필요</small></td>
                 </tr>
             </table>
         </div>
     </div>
     <script>
-        // APNG.ifNeeded(function(){
-        //     try{
-        //         var images = document.querySelectorAll(".apng-image");
-        //         for (var i = 0; i < images.length; i++) {
-        //             APNG.animateImage(images[i]);
-        //         }
-        //     }catch(e){
-        //         $(".msg").show().text("apng-canvas not needed");
-        //     }
-        // });
-
         APNG.ifNeeded()
         .then(function () {
             // var images = document.querySelectorAll(".apng-image");
@@ -123,17 +116,15 @@
             //JQUERY 안쓰면 안됨 왤까?
 
             $(".apng-image").find("img").each(function () { APNG.animateImage(this); });
-            // $(".msg").show().text("canvas 로 로드됩니다.");
             var msg = '<p>canvas 로 로드됩니다.</p>'
-            $('.info').append(msg);
+            $('.apng .info').append(msg);
         })
         .catch(function () {
             // 브라우저가 apng 지원하면 apng로, 지원하지 않으면 canvas로 만들어줌
             // 이 라이브러리를 실행하려면 Canvas, Typed Arrays, Blob URLs, requestAnimationFrame 을 지원되어야 한다.
-            // 이 라이브러리 현재 지원 브라우저: 크롬, 파폭, IE +, 엣지
-            // $(".msg").show().text("apng 로 로드됩니다.");
+            // 이 라이브러리 현재 지원 브라우저: 크롬, 파폭, IE 10+, 엣지
             var msg = '<p>apng 로 로드됩니다.</p>'
-            $('.info').append(msg);
+            $('.apng .info').append(msg);
         });
     </script>
 </body>
