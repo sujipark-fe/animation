@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>apng, webp 테스트</title>
+    <title>apng 테스트</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        .wrap{margin:auto;text-align:center;font-size:15px;}
+        .wrap{max-width: 1200px;margin:auto;padding:2rem 2rem 4rem;font-size:15px;line-height: 1.5;}
+        section{margin-top: 2rem;}
+        h1{margin:1rem 0;}
         .list{overflow:hidden;margin-bottom:40px;}
         .list:before,.list:after{display:block;clear:both;content:'';}
         .list li{display:block;float:left;width:25%;padding:10px;}
@@ -15,8 +17,8 @@
         .source{width:100%;}
         img, video, canvas{display: block;width:100%;border:1px solid #eee;}
 
-        table{margin:auto;border-collapse:collapse;font-size:14px;}
-        table td{padding: 6px 8px;border:1px solid #aaa;}
+        table{margin:auto;border-collapse:collapse;font-size:14px;text-align:center;}
+        table td{padding: 6px 12px;border:1px solid #aaa;}
         table td:nth-child(4){max-width: 380px;}
         table tr:hover{background-color:rgba(0,0,0,0.2);}
 
@@ -31,40 +33,60 @@
     <script src="./apng-canvas.min.js"></script>
 </head>
 <body>
-    <div class="wrap">    
-        <ul class="list">
-            <li class="gif">
-                <div class="source">
-                    <img src="./src/megaman.gif" alt="">
-                </div>
-                <h2>gif</h2>
-            </li>
-            <li class="video">
-                <div class="source video_wrap">
-                    <!-- psd 애니메이션 딜레이타임은 0.05에서 반올림됨
-                        0.01 ~ 0.04 / 0.05 ~ 0.1 사이 같은 움직임
-                        gif, apng와 같은 애니메이션 딜레이 시간은 0.04 ~ 0.1 사이의 속도 인데, 
-                        포토샵에서는 그 사이 딜레이시간을 설정할 수 없음
-                    -->
-                    <video src="./src/megaman.mp4" autoplay loop muted playsinline></video>
-                </div>
-                <h2>video(H.264 mp4)</h2>
-            </li>
-            <li class="apng">
-                <div class="source">
-                    <img src="./src/apng_animated.png" alt="apng">
-                </div>
-                <h2>apng</h2>
-            </li>
-            <li class="apng">
-                <div class="source apng-image"><img src="./src/apng_animated.png" alt=""></div>
-                <div class="info">
-                    <h2>apng/canvas</h2>
-                </div>
-            </li>
-        </ul> 
+    <div class="wrap">
+        <h1>apng 테스트</h1>
 
-        <div class="tbl">
+        <p>작성일: 20/2/24. 최근 수정일: 24/11/13<br>
+          웹에서의 apng, apng/canvas, gif, mp4 타입을 비교합니다.<br>
+          요즘 최신 브라우저에서는 apng를 지원하며, IE에서는 지원하지 않습니다.<br>
+          apng를 지원하지 않는 브라우저를 위해 canvas를 사용하여 브라우저에서 애니메이션 PNG를 지원하는 <a href="https://github.com/davidmz/apng-canvas">apng-canvas</a>라이브러리를 사용하였습니다.<br>
+          이 라이브러리를 사용하면 IE 10 이상까지는 지원됩니다.<br>
+          <br>
+          결론: 이제는 IE를 사용하지 않으니 apng의 IE 지원을 위한 apng-canvas 라이브러리는 필요없게 되었습니다.<br>
+          그 이하 하위 브라우저를 위한 지원이라면 필요할지도 모르나 이제 이런 하위 버전도 굉장히 적은 퍼센트 일 것 입니다.<br>
+          이제는 그냥 편하게 브라우저에서 apng를 사용하면 될 것 같습니다.<br>
+
+          여러 타입과 비교한 결과, apng 파일 용량이 gif 대비 약 85%, mp4 대비 약 93% 수준이므로 용량 측면에서 장점이 있습니다. (제가 만든 파일 기준이므로 물론 파일 마다 다를 수 있습니다.)<br>
+          그래서 그런지 요즘엔 비교적 흔히 사용하는 것 같습니다.
+        </p>
+
+        <section>
+          <h1>타입 별 비교</h1>
+          <ul class="list">
+              <li class="gif">
+                  <div class="source">
+                      <img src="./src/megaman.gif" alt="">
+                  </div>
+                  <h2>gif</h2>
+              </li>
+              <li class="video">
+                  <div class="source video_wrap">
+                      <!-- psd 애니메이션 딜레이타임은 0.05에서 반올림됨
+                          0.01 ~ 0.04 / 0.05 ~ 0.1 사이 같은 움직임
+                          gif, apng와 같은 애니메이션 딜레이 시간은 0.04 ~ 0.1 사이의 속도 인데,
+                          포토샵에서는 그 사이 딜레이시간을 설정할 수 없음
+                      -->
+                      <video src="./src/megaman.mp4" autoplay loop muted playsinline></video>
+                  </div>
+                  <h2>video(H.264 mp4)</h2>
+              </li>
+              <li class="apng">
+                  <div class="source">
+                      <img src="./src/apng_animated.png" alt="apng">
+                  </div>
+                  <h2>apng</h2>
+              </li>
+              <li class="apng">
+                  <div class="source apng-image"><img src="./src/apng_animated.png" alt=""></div>
+                  <div class="info">
+                      <h2>apng/canvas</h2>
+                  </div>
+              </li>
+          </ul>
+        </section>
+
+        <section class="tbl">
+            <h1>브라우저 서포트</h1>
             <table>
                 <thead>
                     <tr>
@@ -77,35 +99,41 @@
                 </thead>
                 <tr>
                     <td>gif</td>
-                    <td>76.1KB</td>
+                    <td>78.3KB</td>
                     <td>O</td>
                     <td>O</td>
                     <td>용량큼, 모든 브라우저 지원<br><small>*dither:88%</small></td>
                 </tr>
                 <tr>
                     <td>video(H.264 mp4)</td>
-                    <td>185KB</td>
+                    <td>189KB</td>
                     <td>IE9이상</td>
                     <td>O</td>
                     <td>재생시간: 1s 반복재생<br><small>*투명 배경일 경우 용량이 더 커질 수 있음</small></td>
                 </tr>
                 <tr>
                     <td>apng</td>
-                    <td>12.5KB</td>
+                    <td>13.2KB</td>
                     <td>IE, Edge 불가</td>
                     <td>삼성브라우저 7.2이상<br>직접 확인 완료:안드로이드8.0, ios 13 safari, chrome</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>apng/canvas</td>
-                    <td>12.6KB</td>
+                    <td>13.2KB</td>
                     <td>IE10이상</td>
                     <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상<br>직접 확인 완료:안드로이드8.0, 삼성브라우저, chrome 79 / ios 12 safari, ios chrome 79</td>
-                    <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원. <small style="color:blue">*CORS정책으로 인해 웹서버에서 확인필요</small></td>
+                    <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원.</td>
                 </tr>
             </table>
-            <a href="https://caniuse.com/?search=apng">CanIUse:apng</a>
-        </div>
+        </section>
+
+        <section>
+            <img src="./src/caniuse-apng.png" alt="apng 브라우저 서포트">
+            <p style="text-align: left; padding-top:1rem;">
+              <a href="https://caniuse.com/?search=apng">CanIUse:apng에서 보기</a>
+            </p>
+        </section>
     </div>
     <script>
         APNG.ifNeeded()
