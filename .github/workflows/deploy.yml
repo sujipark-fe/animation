@@ -4,31 +4,28 @@ on:
   push:
     branches:
       - master   
-    paths:
-      - '**/*'  
+  workflow_dispatch:  # 수동으로 트리거할 수도 있음 
 
 jobs:
   build-and-deploy:
-    runs-on: 'node20'
+    runs-on: ubuntu-latest
     
     steps:
       # 1. 리포지토리 체크아웃
       - name: Check out repository
         uses: actions/checkout@v2
-        
-      # 2. dist 폴더 생성
-      - name: Create dist folder
-        run: mkdir -p dist
 
-      # 3. 모든 폴더에서 index.html 파일을 dist 폴더로 복사
-      - name: Copy all index.html files to dist
-        run: |
-          find . -name 'index.html' -exec cp {} dist/ \;
+      # 2. Node.js 20 버전 설정
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  
 
-      # 4. GitHub Pages에 배포 (GitHub Pages를 사용하는 경우)
+      # 3. GitHub Pages에 배포
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # gh-pages 브랜치에 배포
-          folder: dist      # dist 폴더를 배포
+          folder: .      # dist 폴더를 배포
           token: ${{ secrets.GITHUB_TOKEN }}  # GitHub에서 제공하는 기본 토큰
+          
