@@ -93,14 +93,14 @@
                     <td>apng</td>
                     <td>12.5KB</td>
                     <td>IE, Edge 불가</td>
-                    <td>삼성브라우저 7.2이상 (하위디바이스 확인필요)<br>확인완료:안드로이드8.0, ios 13 safari, chrome</td>
+                    <td>삼성브라우저 7.2이상<br>직접 확인 완료:안드로이드8.0, ios 13 safari, chrome</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>apng/canvas</td>
                     <td>12.6KB</td>
                     <td>IE10이상</td>
-                    <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상<br>확인완료:안드로이드8.0, 삼성브라우저, chrome 79 / ios 12 safari, ios chrome 79</td>
+                    <td>삼성브라우저 4, ios safari 3.2, Android Chrome 79이상<br>직접 확인 완료:안드로이드8.0, 삼성브라우저, chrome 79 / ios 12 safari, ios chrome 79</td>
                     <td>canvas는 IE9+ 이지만, 플러그인이 IE10+ 지원. <small style="color:blue">*CORS정책으로 인해 웹서버에서 확인필요</small></td>
                 </tr>
             </table>
@@ -109,12 +109,6 @@
     <script>
         APNG.ifNeeded()
         .then(function () {
-            // var images = document.querySelectorAll(".apng-image");
-            // for (var i = 0; i < images.length; i++) {
-            //     APNG.animateImage(images[i]);
-            // }
-            //JQUERY 안쓰면 안됨 왤까?
-
             $(".apng-image").find("img").each(function () { APNG.animateImage(this); });
             var msg = '<p>canvas 로 로드됩니다.</p>'
             $('.apng .info').append(msg);
